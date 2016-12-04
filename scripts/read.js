@@ -125,7 +125,7 @@ var processDictionaryData = function (data, callback) {
 
 
         addWord(json, function (soundex, word) {
-            console.log(soundex, word);
+            // console.log(soundex, word);
         });
         callback();
 
@@ -138,7 +138,7 @@ var processDictionaryData = function (data, callback) {
 setTimeout(function () {
     fs.close(fd);
 
-    async.eachLimit(dictionaryDatas, 1, processDictionaryData, function (err) {
+    async.eachLimit(dictionaryDatas, 20, processDictionaryData, function (err) {
         // if any of the file processing produced an error, err would equal that error
         if (err) {
             // One of the iterations produced an error.
