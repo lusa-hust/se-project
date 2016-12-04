@@ -7,7 +7,7 @@
 var express    = require('express');        // call express
 var app        = express();                 // define our app using express
 var bodyParser = require('body-parser');
-var db = require('./model/db');
+var db = require('./models/db');
 
 // app.set('views', __dirname + '/views')
 // app.set('view engine', 'jade')
@@ -22,8 +22,8 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 3000;        // set our port
 
 // add Controller
-// app.use('/api', require('./controller/'));
-// app.use('/', require('./controller/ViewsController'));
+app.use('/api', require('./controllers/RestfulController'));
+// app.use('/', require('./controllers/ViewsController'));
 
 // start
 app.listen(port);

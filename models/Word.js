@@ -19,7 +19,7 @@ var WordSchema = new Schema({
     pronounce: String
 });
 
-WordSchema.plugin(autoIncrement.plugin, 'Word');
+WordSchema.plugin(autoIncrement.plugin, 'word');
 
 
-module.exports = mongoose.model('Word', WordSchema);
+module.exports = mongoose.model('word', WordSchema);

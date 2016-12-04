@@ -7,17 +7,17 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
     autoIncrement = require('./db');
 
-var Soundex = new Schema({
+var SoundexSchema = new Schema({
     _id: Number,
     soundex: {
         type: String,
         require: true,
         unique: true
     },
-    words: [{ type: Number, ref: 'Word' }],
+    words: [{ type: Number, ref: 'word' }],
 });
 
-Soundex.plugin(autoIncrement.plugin, 'Soundex');
+SoundexSchema.plugin(autoIncrement.plugin, 'soundex');
 
 
-module.exports = mongoose.model('Soundex', Soundex);
+module.exports = mongoose.model('soundex', SoundexSchema);
