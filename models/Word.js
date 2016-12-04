@@ -16,8 +16,7 @@ var WordSchema = new Schema({
         require: true
     },
 
-    pronounce: String,
-    soundex: { type: Number, ref: 'Soundex' },
+    pronounce: String
 });
 
 WordSchema.plugin(autoIncrement.plugin, 'Word');
