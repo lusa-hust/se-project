@@ -27,4 +27,4 @@ app.use('/api', require('./controllers/RestfulController'));
 
 // start
 app.listen(port);
-console.log('Search Product Module in on port ' + port);
+console.log('Dict in on port ' + port);
