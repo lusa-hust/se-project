@@ -16,13 +16,13 @@ var RestfulController = express.Router();
 var searchWord = function (req, res) {
 
 
-    Word.find({'word': { "$regex": req.params.word, "$options": "i" }}).exec().then(function (words) {
-        if (Object.keys(words).length != 0) {
+    Word.findOne({'word': req.params.word}).exec().then(function (word) {
+        if (word) {
             // found
             res.json({
                 status: true,
                 found: true,
-                words: words
+                word: word
             });
             res.end();
         } else {

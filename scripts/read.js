@@ -36,30 +36,33 @@ async.each(indexLines, processIndexCb, function (err) {
     }
 });
 
-var dictionaryDatas = []
+var dictDatas = []
 
 
-var getWordCallback = function (err, bytesRead, buffer) {
-    if (err) {
-        console.log(err);
-        process.exit();
-    }
+var getWord = function (indexData, callback) {
 
-    else {
-        // count++;
-        // console.log(dictionaryDatas.length);
-        dictionaryDatas.push(buffer.toString())
-        // console.log(bytesRead)
-        // if(count == 2)
-        //     process.exit();
-    }
-}
+    var buffer = new Buffer(indexData.size);
 
-var getWord = function (json, callback) {
+    fs.read(fd, buffer, 0, indexData.size, indexData.pos, function (err, bytesRead, buffer) {
+        if (err) {
+            console.log(err);
+            process.exit();
+        }
 
-    var buffer = new Buffer(json.size);
+        else {
+            // count++;
+            // console.log(dictionaryDatas.length);
 
-    fs.read(fd, buffer, 0, json.size, json.pos, getWordCallback);
+            var dictData = {};
+
+            dictData.word = indexData.word;
+            dictData.content = buffer.toString()
+            dictDatas.push(dictData);
+            // console.log(bytesRead)
+            // if(count == 2)
+            //     process.exit();
+        }
+    });
 
     callback()
 }
@@ -81,10 +84,10 @@ var processDictionaryData = function (data, callback) {
     setTimeout(function () {
         var flag;
         try {
-            flag = (data.split('\n')[0].match(/\//g) || []).length >= 2;
+            flag = (data.content.split('\n')[0].match(/\//g) || []).length >= 2;
         } catch (err) {
             console.log('===================\n')
-            console.log(data);
+            console.log(data.content);
             console.log('===================\n')
         }
 
@@ -97,24 +100,17 @@ var processDictionaryData = function (data, callback) {
         var json = {}
 
         // get word
-        try {
-            json.word = re.exec(data)[1].trim();
-        } catch (err) {
-            console.log('===================\n')
-            console.log(data);
-            console.log('===================\n')
-            process.exit()
-            console.log(err)
-        }
+
+        json.word = data.word;
 
 
         if (flag) {
             // get pronounce if have
             re = /\/(.*)\//;
-            json.pronounce = re.exec(data)[1];
+            json.pronounce = re.exec(data.content)[1];
         }
 
-        var lines = data.split('\n');
+        var lines = data.content.split('\n');
         lines.splice(0, 1);
         var newText = lines.join('\n');
 
@@ -138,7 +134,7 @@ var processDictionaryData = function (data, callback) {
 setTimeout(function () {
     fs.close(fd);
 
-    async.eachLimit(dictionaryDatas, 20, processDictionaryData, function (err) {
+    async.eachLimit(dictDatas, 20, processDictionaryData, function (err) {
         // if any of the file processing produced an error, err would equal that error
         if (err) {
             // One of the iterations produced an error.
