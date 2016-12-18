@@ -2,5 +2,32 @@ doctype
 html
   head
     title Ict dict
-  body.
-    ok
+    link(rel='stylesheet', href='/static/bower-plugins/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/static/css/style.css')
+  body
+    .app-container
+      .search-bar
+        .row
+          .col-xs-2.logo-container
+            .logo.
+              IdiCT
+          .col-xs-6
+            .search-box
+              input(type='text', name='word', value='', placeholder='search here')
+          .col-xs-2
+            .dictionary-button
+              select
+                option(value=0) A-V
+          .col-xs-2
+            .lookup-button
+              span.glyphicon.glyphicon-search
+      .row.presentation-container
+        .col-xs-9.word-container.
+          ok ok
+        .col-xs-3.history-container
+          ok ok
+        
+    script(src='/static/bower-plugins/jquery/dist/jquery.min.js')
+    script(src='/static/bower-plugins/bootstrap/dist/js/bootstrap.min.js')
+    script(src='/static/bower-plugins/angular/angular.min.js')
+    
