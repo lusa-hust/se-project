@@ -1,0 +1,26 @@
+{
+  "name": "ictdict",
+  "description": "dictionary created by Luong, Sam, Son, Dat",
+  "main": "app.js",
+  "authors": [
+    "LuongNV <luongintel2009@gmail.com>"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "ictdict"
+  ],
+  "homepage": "https://github.com/luongli/se-project",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "^3.1.1",
+    "bootstrap": "^3.3.7",
+    "angular": "angularjs#^1.6.0"
+  }
+}
