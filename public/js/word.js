@@ -8,47 +8,95 @@ function displayWord(word) {
   app.meaning.content = word.meaning;
   app.meaning.length = word.meaning.length;
   app.meaning.pointer = 0;
-  $('.word-meaning').html(word.meaning);
-  parseMeaning();
+  $('.word-meaning').html(parseMeaning());
 }
 
 function parseMeaning() {
   var meanObj = app.meaning;
+  var html = '';
   while(meanObj.pointer < meanObj.length) {
     // loop through each character
-    switch (meanObj.content[meanObj.pointer]) {
+    switch (meanObj.content[meanObj.pointer++]) {
       case '-':
-        console.log(getWordDefinition());
+        html += getWordDefinition();
         break;
       case '*':
-        console.log(getWordCategory());
+        html += getWordCategory();
         break;
       case '=':
-        console.log(getExample());
+        html += getExample();
+        break;
+      case '!':
+        if (isLetter(meanObj.content[meanObj.pointer])){
+          html += getPhrase();
+        }
         break;
       default:
         meanObj.pointer++;
     }
   } // end while
 
+  return html;
 }
 
 function getWordDefinition() {
-  return getToken();
+  return '<div class="word-definition"> - ' + getToken() + '</div>';
 }
 
 function getWordCategory() {
-  return getToken();
+  return '<div class="word-category">' + getToken() + '</div>';
 }
 
 function getExample() {
-  return getToken();
+  var example = '<div class="word-example"><div><em>' + getToken() + '</em></div>';
+  app.meaning.pointer++;
+  var exampleMeaning = '<div>' + getToken() + '</div></div>';
+  return example + exampleMeaning;
 }
+
+function getPhrase() {
+  var phrase = '<div class="word-phrase word-definition"> + ' + getToken() + '</div>';
+  app.meaning.pointer++;
+  var phraseMeaning = getToken();
+  console.log(phraseMeaning.search('(xem)'));
+  if (phraseMeaning.search('(xem)') == 1) {
+    // if first substring is xem
+    var tokens = phraseMeaning.split(' ');
+    phraseMeaning = '<div class="word-example"><em>(xem) <a href="#">' + tokens[1] + '</a></em></div>';
+  } else {
+    phraseMeaning = '<div class="word-example"><em>' + phraseMeaning + '</em></div>';
+  }
+  return phrase + phraseMeaning;
+}
+
 /**
  * check if the character is a delimiter
  */
-function isDelimiter(ch) {
-  if (ch === '*' || ch === '-' || ch === '=') {
+function isDelimiter(pointer) {
+  var i = 0;
+  var len = app.delimiter.length;
+  if (app.meaning.content[pointer] === '!' && isLetter(app.meaning.content[pointer+1])) {
+    // if it is a ! followed by a letter
+    // it is a delimiter
+    return true;
+  }
+  // loop through the array of delimiter
+  for (i = 0; i < len; i++) {
+    if (app.meaning.content[pointer] === app.delimiter[i]) {
+      // if one delimiter is found
+      // return true
+      return true;
+    }
+  }
+
+  return false;
+}
+
+/**
+ * check if the character is a letter
+ */
+function isLetter(ch) {
+  if (ch.match(/[a-zA-Z]/i)) {
     return true;
   } else {
     return false;
@@ -56,11 +104,10 @@ function isDelimiter(ch) {
 }
 
 function getToken() {
-  app.meaning.pointer++;
   // mark the starting point
   var start = app.meaning.pointer;
   while(app.meaning.pointer < app.meaning.length &&
-    !isDelimiter(app.meaning.content[app.meaning.pointer])) {
+    !isDelimiter(app.meaning.pointer)) {
       // while the current char is not a delimiter and
       // pointer is less than length
       // move to the next character

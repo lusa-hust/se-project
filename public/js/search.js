@@ -7,6 +7,7 @@ var app = {
     pointer: 0,
     length: 0,
   },
+  delimiter: ['*', '-', '=', '+'],
 };
 $(document).ready(function () {
 
