@@ -54,5 +54,14 @@
 /************************* presentation container **********************/
 .presentation-container {
   margin: 20px auto 0px auto;
-  max-width: 950px;
+  max-width: 900px;
+}
+
+.word-container {
+  padding-left: 5%;
+}
+
+.lookup-word {
+  font-size: x-large;
+  font-weight: bold;
 }
