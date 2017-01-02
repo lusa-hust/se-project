@@ -1,4 +1,4 @@
-app.host = 'http://52.36.12.106';
+app.host = location.protocol + "//" + window.location.hostname + (location.port ? ':'+location.port: '');
 
 /**
  * service used to get data

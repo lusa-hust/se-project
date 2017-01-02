@@ -14,7 +14,6 @@ var RestfulController = express.Router();
 
 
 var searchWord = function (req, res) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
     Word.findOne({'word': req.params.word}).exec().then(function (word) {
         if (word) {
             // found
