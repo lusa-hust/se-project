@@ -14,7 +14,7 @@ var RestfulController = express.Router();
 
 
 var searchWord = function (req, res) {
-    Word.findOne({'word': req.params.word}).exec().then(function (word) {
+    Word.findOne({'word': {'$regex': '^' + req.params.word + '$', $options: 'i'}}).exec().then(function (word) {
         if (word) {
             // found
             res.json({
