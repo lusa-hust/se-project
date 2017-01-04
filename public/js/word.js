@@ -18,7 +18,7 @@ function lookup(word) {
         // if the word is found
         displayWord(data.word);
         // set the current lookup word
-        app.word = data.word;
+        app.word = word;
       } else {
         // not found
         // suggest the list of similar words
