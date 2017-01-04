@@ -2,6 +2,7 @@ var app = {
   api: {
     lookup: '/api/search/word/',
   },
+  word: '',
   meaning: {
     content: '',
     pointer: 0,

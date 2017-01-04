@@ -9,6 +9,7 @@ function lookup(word) {
     // do nothing
     return;
   }
+
   getData(app.api.lookup, word).done(function(data) {
     console.log(data);
     if (data.status) {
@@ -16,9 +17,17 @@ function lookup(word) {
       if (data.found) {
         // if the word is found
         displayWord(data.word);
+        // set the current lookup word
+        app.word = data.word;
       } else {
         // not found
-        // display error
+        // suggest the list of similar words
+        // sorry I don't sanitise input here
+        $('.lookup-word').html('\'' + word + '\' not found!');
+        $('.word-pronounce').html('Search suggestions for \'' + word + '\':');
+        displaySuggestions(data.soundex);
+        // reset the current looking up word to empty
+        app.word = '';
       }
     } else {
       // display error
@@ -147,4 +156,25 @@ function getToken() {
     var token = app.meaning.content.substring(start, app.meaning.pointer);
     return token.trim();
   }
+}
+
+/**
+ * display the list of suggestions
+ */
+function displaySuggestions(soundexObj) {
+  console.log(soundexObj);
+  var words = soundexObj.words;
+  var len = words.length;
+  var i = 0;
+  var html = '';
+
+  for (i = 0; i < len; i++) {
+    // loop through the word list and make html string for that word
+    html += '<div class="row suggested-word">' + (i+1) + '. ' +
+            '<a href="#" class="cross-ref-link">' + words[i].word + '</a></div>';
+  }
+
+  html = '<div class="suggestion-container">' + html + '</div>';
+
+  $('.word-meaning').html(html);
 }
