@@ -1,4 +1,22 @@
 
+function lookup(word) {
+  getData(app.api.lookup, word).done(function(data) {
+    console.log(data);
+    if (data.status) {
+      // if fetch successfully
+      if (data.found) {
+        // if the word is found
+        displayWord(data.word);
+      } else {
+        // not found
+        // display error
+      }
+    } else {
+      // display error
+    }
+  });
+}
+
 function displayWord(word) {
   $('.lookup-word').html(word.word);
   var pronounce = word.pronounce ? word.pronounce : '';
@@ -58,11 +76,10 @@ function getPhrase() {
   var phrase = '<div class="word-phrase word-definition"> + ' + getToken() + '</div>';
   app.meaning.pointer++;
   var phraseMeaning = getToken();
-  console.log(phraseMeaning.search('(xem)'));
   if (phraseMeaning.search('(xem)') == 1) {
     // if first substring is xem
     var tokens = phraseMeaning.split(' ');
-    phraseMeaning = '<div class="word-example"><em>(xem) <a href="#">' + tokens[1] + '</a></em></div>';
+    phraseMeaning = '<div class="word-example"><em>(xem) <a href="#" class="cross-ref-link">' + tokens[1] + '</a></em></div>';
   } else {
     phraseMeaning = '<div class="word-example"><em>' + phraseMeaning + '</em></div>';
   }
