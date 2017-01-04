@@ -9,12 +9,17 @@ var app = {
   },
   delimiter: ['*', '-', '=', '+'],
 };
+
 $(document).ready(function () {
 
   // when user click on lookup button
-  $(document).on("click", ".lookup-button", function() {
-    var word = $('input[name="word"]').val();
-    lookup(word);
+  $(document).on("click", ".lookup-button", getInputAndLookup);
+
+  // when user type on search box
+  $(document).on("keypress", 'input[name="word"]', function (e) {
+    if (e.which == 13) {
+      getInputAndLookup();
+    }
   });
 
   // when user click on cross reference link
@@ -23,4 +28,6 @@ $(document).ready(function () {
     $('input[name="word"]').val(word);
     lookup(word);
   });
+
+
 });

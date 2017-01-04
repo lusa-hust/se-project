@@ -1,5 +1,14 @@
+function getInputAndLookup() {
+  var word = $('input[name="word"]').val();
+  lookup(word);
+}
 
 function lookup(word) {
+  if (!word) {
+    // if the word is empty
+    // do nothing
+    return;
+  }
   getData(app.api.lookup, word).done(function(data) {
     console.log(data);
     if (data.status) {
