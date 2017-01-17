@@ -24,9 +24,19 @@ $(document).ready(function () {
   $(document).on("click", ".lookup-button", getInputAndLookup);
 
   // when user types on search box
-  $(document).on("keypress", 'input[name="word"]', function (e) {
+  $(document).on("keyup", 'input[name="word"]', function (e) {
     if (e.which == 13) {
+      // when user press enter button,
+      // search word
       getInputAndLookup();
+    } else {
+      // get suggestions
+      var typingWord = $('input[name="word"]').val();
+      if (typingWord) {
+        // if the value of input box is not empty
+        // get the suggestions
+        suggest();
+      }
     }
   });
 
