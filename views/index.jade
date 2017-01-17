@@ -6,6 +6,7 @@ html
     link(rel='stylesheet', href='/static/css/style.css')
     script(src='/static/bower-plugins/jquery/dist/jquery.min.js')
     script(src='/static/bower-plugins/bootstrap/dist/js/bootstrap.min.js')
+    script(src='https://www.google.com/jsapi')
     script(src='/static/js/search.js')
     script(src='/static/js/service.js')
     script(src='/static/js/word.js')
@@ -14,8 +15,8 @@ html
       .search-bar
         .row
           .col-xs-2.logo-container
-            .logo.
-              IdiCT
+            .logo
+              img(src="/static/images/logo.png")
           .col-xs-6
             .search-box
               input(type='text', name='word', value='', placeholder='search here')

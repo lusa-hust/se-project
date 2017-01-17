@@ -17,6 +17,11 @@
   min-width: 65px;
 }
 
+.logo > img {
+  height: 65px;
+  width: auto;
+}
+
 .search-box > input {
   padding: 0 5px;
   width: 100%;
