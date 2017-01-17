@@ -192,12 +192,12 @@ var cleanWordList = function (req, res) {
 };
 
 
-WordListRestController.get('/WordList', getWordList);
+WordListRestController.get('/list', getWordList);
 
-WordListRestController.get('/WordList/:word', addWordToList);
+WordListRestController.get('/list/:word', addWordToList);
 
-WordListRestController.delete('/WordList', cleanWordList);
+WordListRestController.delete('/list', cleanWordList);
 
-WordListRestController.delete('/WordList/:word', deleteWordToList);
+WordListRestController.delete('/list/:word', deleteWordToList);
 
 module.exports = WordListRestController;
