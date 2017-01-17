@@ -32,7 +32,11 @@ app.use('/api/auth', require('./controllers/AuthController'));
 
 app.use('/api', require('./controllers/TrackingListRestController'));
 
+app.use('/api', require('./controllers/WordListRestController'));
+
 app.use('/', require('./controllers/ViewController'));
+
+
 
 // start
 app.listen(port);
