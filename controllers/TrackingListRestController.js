@@ -11,9 +11,18 @@ var TrackingList = require('../models/TrackingList');
 var TrackingListRestController = express.Router();
 
 
-var getTrackingListByUserId = function (req, res) {
-    // get tracking list by user id
-    TrackingList.findOne({'user_id': req.params.id}, function (err, tList) {
+var getTrackingList = function (req, res) {
+    // get tracking list
+
+    if (req.authUser === undefined) {
+        res.status(500).json({
+            status: false,
+            error: "Can not find tracking list because don't have token in header"
+        });
+        return;
+    }
+
+    TrackingList.findOne({'user_id': req.authUser._id}, function (err, tList) {
         if (err || !tList) {
             res.status(500).json({
                 status: false,
@@ -29,9 +38,18 @@ var getTrackingListByUserId = function (req, res) {
     });
 };
 
-var editTrackingListByUserId = function (req, res) {
-    // edit tracking list by user id
-    TrackingList.findOne({'user_id': req.params.id}, function (err, tList) {
+var editTrackingList = function (req, res) {
+    // edit tracking list
+
+    if (req.authUser === undefined) {
+        res.status(500).json({
+            status: false,
+            error: "Can not find tracking list because don't have token in header"
+        });
+        return;
+    }
+
+    TrackingList.findOne({'user_id': req.authUser._id}, function (err, tList) {
 
         if (err || !tList) {
             res.status(500).json({
@@ -70,8 +88,17 @@ var editTrackingListByUserId = function (req, res) {
     });
 };
 
-var cleanTrackingListByUserId = function (req, res) {
-    TrackingList.findOne({'user_id': req.params.id}, function (err, tList) {
+var cleanTrackingList = function (req, res) {
+
+    if (req.authUser === undefined) {
+        res.status(500).json({
+            status: false,
+            error: "Can not find tracking list because don't have token in header"
+        });
+        return;
+    }
+
+    TrackingList.findOne({'user_id': req.authUser._id}, function (err, tList) {
 
         if (err || !tList) {
             res.status(500).json({
@@ -107,11 +134,11 @@ var cleanTrackingListByUserId = function (req, res) {
 };
 
 
-TrackingListRestController.get('/tracking/:id', getTrackingListByUserId);
+TrackingListRestController.get('/tracking', getTrackingList);
 
-TrackingListRestController.put('/tracking/:id', editTrackingListByUserId);
+TrackingListRestController.put('/tracking', editTrackingList);
 
-TrackingListRestController.delete('/tracking/:id', cleanTrackingListByUserId);
+TrackingListRestController.delete('/tracking', cleanTrackingList);
 
 
 module.exports = TrackingListRestController;
