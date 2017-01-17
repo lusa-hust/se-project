@@ -47,7 +47,28 @@ var searchWord = function (req, res) {
 
 };
 
+var suggest = function (req, res) {
+    var limit = Number(req.query.limit) || 10;
+
+    Word.find({'word': {'$regex': '^' + req.params.word , $options: 'i'}}).limit(limit).exec().then(function (words) {
+        if (words) {
+            // found
+            res.json({
+                status: true,
+                words: words
+            });
+            res.end();
+        } else {
+            res.json({
+                status: false,
+            });
+            res.end();
+        }
+    });
+
+};
 
 RestfulController.get('/search/word/:word', searchWord);
+RestfulController.get('/suggest/:word', suggest);
 
 module.exports = RestfulController;
