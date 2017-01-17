@@ -102,6 +102,15 @@ var addWordToList = function (req, res) {
 
         var list = wList.list || [];
 
+        if (list.indexOf(req.params.word) != -1) {
+            res.status(500).json({
+                status: false,
+                error: "Word already in list"
+            });
+            res.end();
+            return;
+        }
+
         list.push(req.params.word);
 
         wList.list = list;
@@ -118,7 +127,7 @@ var addWordToList = function (req, res) {
                 return;
             }
 
-            res.status(200).json({
+            res.status(201).json({
                 status: true,
                 message: 'Add word success !'
             });
