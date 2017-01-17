@@ -30,7 +30,7 @@ app.use('/api', require('./controllers/RestfulController'));
 app.use('/api', require('./controllers/UsersRestController'));
 app.use('/api/auth', require('./controllers/AuthController'));
 
-app.use('/api', require('./controller/TrackingListRestController'));
+app.use('/api', require('./controllers/TrackingListRestController'));
 
 app.use('/', require('./controllers/ViewController'));
 
