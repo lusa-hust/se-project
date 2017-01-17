@@ -14,7 +14,7 @@ var TrackingListRestController = express.Router();
 var getTrackingListByUserId = function (req, res) {
     // get tracking list by user id
     TrackingList.findOne({'user_id': req.params.id}, function (err, tList) {
-        if (err) {
+        if (err || !tList) {
             res.status(500).json({
                 status: false,
                 error: "Can not find tracking list because database error"
