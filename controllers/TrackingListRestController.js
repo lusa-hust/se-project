@@ -33,7 +33,7 @@ var editTrackingListByUserId = function (req, res) {
     // edit tracking list by user id
     TrackingList.findOne({'user_id': req.params.id}, function (err, tList) {
 
-        if (err) {
+        if (err || !tList) {
             res.status(500).json({
                 status: false,
                 error: "Can not find tracking list because of database error !"
@@ -73,7 +73,7 @@ var editTrackingListByUserId = function (req, res) {
 var cleanTrackingListByUserId = function (req, res) {
     TrackingList.findOne({'user_id': req.params.id}, function (err, tList) {
 
-        if (err) {
+        if (err || !tList) {
             res.status(500).json({
                 status: false,
                 error: "Can not find tracking list because of database error !"
