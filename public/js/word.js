@@ -1,3 +1,39 @@
+function getInputAndLookup() {
+  var word = $('input[name="word"]').val();
+  lookup(word);
+}
+
+function lookup(word) {
+  if (!word) {
+    // if the word is empty
+    // do nothing
+    return;
+  }
+
+  getData(app.api.lookup, word).done(function(data) {
+    console.log(data);
+    if (data.status) {
+      // if fetch successfully
+      if (data.found) {
+        // if the word is found
+        displayWord(data.word);
+        // set the current lookup word
+        app.word = word;
+      } else {
+        // not found
+        // suggest the list of similar words
+        // sorry I don't sanitise input here
+        $('.lookup-word').html('\'' + word + '\' not found!');
+        $('.word-pronounce').html('Search suggestions for \'' + word + '\':');
+        displaySuggestions(data.soundex);
+        // reset the current looking up word to empty
+        app.word = '';
+      }
+    } else {
+      // display error
+    }
+  });
+}
 
 function displayWord(word) {
   $('.lookup-word').html(word.word);
@@ -58,11 +94,10 @@ function getPhrase() {
   var phrase = '<div class="word-phrase word-definition"> + ' + getToken() + '</div>';
   app.meaning.pointer++;
   var phraseMeaning = getToken();
-  console.log(phraseMeaning.search('(xem)'));
   if (phraseMeaning.search('(xem)') == 1) {
     // if first substring is xem
     var tokens = phraseMeaning.split(' ');
-    phraseMeaning = '<div class="word-example"><em>(xem) <a href="#">' + tokens[1] + '</a></em></div>';
+    phraseMeaning = '<div class="word-example"><em>(xem) <a href="#" class="cross-ref-link">' + tokens[1] + '</a></em></div>';
   } else {
     phraseMeaning = '<div class="word-example"><em>' + phraseMeaning + '</em></div>';
   }
@@ -121,4 +156,25 @@ function getToken() {
     var token = app.meaning.content.substring(start, app.meaning.pointer);
     return token.trim();
   }
+}
+
+/**
+ * display the list of suggestions
+ */
+function displaySuggestions(soundexObj) {
+  console.log(soundexObj);
+  var words = soundexObj.words;
+  var len = words.length;
+  var i = 0;
+  var html = '';
+
+  for (i = 0; i < len; i++) {
+    // loop through the word list and make html string for that word
+    html += '<div class="row suggested-word">' + (i+1) + '. ' +
+            '<a href="#" class="cross-ref-link">' + words[i].word + '</a></div>';
+  }
+
+  html = '<div class="suggestion-container">' + html + '</div>';
+
+  $('.word-meaning').html(html);
 }

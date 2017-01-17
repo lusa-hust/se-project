@@ -109,3 +109,17 @@
 .word-phrase {
   color: #234b9a;
 }
+
+/************************* word suggestion ***********************/
+.suggestion-container {
+  margin-left: 50px;
+}
+
+.suggested-word {
+  background-color: #eef1f5;
+  font-size: medium;
+  line-height: 30px;
+  margin: 3px 0px;
+  padding-left: 15px;
+  font-weight: bold;
+}
