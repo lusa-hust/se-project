@@ -17,6 +17,7 @@ var deleteWordToList = function (req, res) {
             status: false,
             error: "Can not find Word list because don't have token in header"
         });
+        res.end();
         return;
     }
 
@@ -26,6 +27,7 @@ var deleteWordToList = function (req, res) {
                 status: false,
                 error: "Can not find Word list because database error"
             });
+            res.end();
             return;
         }
 
@@ -34,6 +36,8 @@ var deleteWordToList = function (req, res) {
                  status: false,
                  message: 'List is empty !'
              });
+             res.end();
+             return;
          }
 
          var list = wList.list;
@@ -46,6 +50,8 @@ var deleteWordToList = function (req, res) {
                 status: false,
                 message: 'Word not in list or List is empty !'
             });
+            res.end();
+            return;
         }
 
         list.splice(index, 1);
@@ -61,6 +67,7 @@ var deleteWordToList = function (req, res) {
                     status: false,
                     error: "Can not delete Word list because database error"
                 });
+                res.end();
                 return;
             }
 
@@ -79,6 +86,7 @@ var addWordToList = function (req, res) {
             status: false,
             error: "Can not find Word list because don't have token in header"
         });
+        res.end();
         return;
     }
 
@@ -88,6 +96,7 @@ var addWordToList = function (req, res) {
                 status: false,
                 error: "Can not find Word list because database error"
             });
+            res.end();
             return;
         }
 
@@ -105,6 +114,7 @@ var addWordToList = function (req, res) {
                     status: false,
                     error: "Can not add Word list because database error"
                 });
+                res.end();
                 return;
             }
 
@@ -125,6 +135,7 @@ var getWordList = function (req, res) {
             status: false,
             error: "Can not find Word list because don't have token in header"
         });
+        res.end();
         return;
     }
 
@@ -134,6 +145,7 @@ var getWordList = function (req, res) {
                 status: false,
                 error: "Can not find Word list because database error"
             });
+            res.end();
             return;
         }
         res.json({
@@ -152,6 +164,7 @@ var cleanWordList = function (req, res) {
             status: false,
             error: "Can not find Word list because don't have token in header"
         });
+        res.end();
         return;
     }
 
@@ -163,6 +176,7 @@ var cleanWordList = function (req, res) {
                 error: "Can not find Word list because of database error !"
             });
 
+            res.end();
             return;
         }
 

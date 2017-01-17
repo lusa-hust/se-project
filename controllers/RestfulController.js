@@ -120,6 +120,8 @@ var getUserForToken = function (req, res, next) {
             if (user != null) {
                 req.authUser = user;
                 next();
+            } else {
+                next();
             }
         });
     } else {
