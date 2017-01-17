@@ -16,10 +16,6 @@ var UserSchema = new Schema({
     password: {
         type: String,
     },
-    admin: {
-        type: Boolean,
-        default: false
-    },
     token: String
 });
 
@@ -61,25 +57,5 @@ UserSchema.methods.comparePassword = function(candidatePassword, cb) {
 };
 
 var User = mongoose.model('User', UserSchema);
-
-User.find({}).exec(function (err, collection) {
-    if (collection.length === 0) {
-        var user = new User({
-            email: 'admin@admin.com',
-            name: 'admin',
-            password: 123,
-            admin: true
-        });
-        user.save();
-
-        var userz = new User({
-            email: 'test@test.com',
-            name: 'test',
-            password: 123,
-        });
-        userz.save();
-
-    }
-});
 
 module.exports = mongoose.model('User', UserSchema);

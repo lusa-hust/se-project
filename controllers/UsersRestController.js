@@ -5,7 +5,7 @@
 'use strict'
 
 var express = require('express');
-var User = require('../model/user');
+var User = require('../models/User');
 
 var DataValidator = require('./Helper/DataValidator');
 var DV = new DataValidator();
@@ -41,10 +41,6 @@ var addUser = function (req, res) {
     newUser.email = req.body.email;
 
     newUser.password = req.body.password;
-
-    if (req.body.admin != undefined) {
-        newUser.admin = req.body.admin;
-    }
 
     newUser.save(function (err) {
         if (err) {
@@ -156,40 +152,6 @@ var getAllUser = function (req, res) {
 
     });
 };
-
-var checkAuth = function (req, res, next) {
-
-    if (req.headers.token !== undefined) {
-        User.findOne({'token': req.headers.token}, function (err, person) {
-            if (err || person == null) {
-                res.status(403).json({
-                    status: false,
-                    error: "Forbidden need Admin permission"
-                });
-                return;
-            }
-
-            if (person.admin == true)
-                next();
-            else if (req.params.id != undefined) {
-                if (req.params.id == person._id)
-                    next();
-            } else {
-                res.status(403).json({
-                    status: false,
-                    error: "Forbidden need Admin permission"
-                });
-            }
-
-        });
-    } else {
-        res.status(403).json({
-            status: false,
-            error: "Forbidden need Admin permission"
-        });
-    }
-}
-UsersRestController.use('/', checkAuth);
 
 UsersRestController.post('/user', addUser);
 

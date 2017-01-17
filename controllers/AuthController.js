@@ -1,7 +1,7 @@
 'use strict'
 
 var express = require('express'),
-    User = require('../model/user'),
+    User = require('../models/User'),
     SALT_WORK_FACTOR = 10,
     bcrypt = require('bcrypt');
 

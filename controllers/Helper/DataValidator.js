@@ -3,7 +3,7 @@
  */
 'use strict'
 
-var User = require('../../model/user')
+var User = require('../../models/User')
 
 var DataValidator = function () {
     this.emailValidator = function (email) {
