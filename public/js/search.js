@@ -1,6 +1,7 @@
 var app = {
   api: {
     lookup: '/api/search/word/',
+    suggest: '/api/suggest/',
   },
   word: '',
   msg: null,
@@ -10,6 +11,7 @@ var app = {
     length: 0,
   },
   delimiter: ['*', '-', '=', '+'],
+  suggestQueue: [],
 };
 
 $(document).ready(function () {
@@ -35,7 +37,7 @@ $(document).ready(function () {
       if (typingWord) {
         // if the value of input box is not empty
         // get the suggestions
-        suggest();
+        suggest(typingWord);
       }
     }
   });

@@ -27,7 +27,7 @@ function lookup(word) {
         // sorry I don't sanitise input here
         $('.lookup-word').html('\'' + word + '\' not found!');
         $('.word-pronounce').html('Search suggestions for \'' + word + '\':');
-        displaySuggestions(data.soundex);
+        displayRelatedWords(data.soundex);
         // reset the current looking up word to empty
         app.word = '';
       }
@@ -50,10 +50,9 @@ function displayWord(word) {
 }
 
 /**
- * display the list of suggestions
+ * display the list of suggestions for not found word
  */
-function displaySuggestions(soundexObj) {
-  console.log(soundexObj);
+function displayRelatedWords(soundexObj) {
   var words = soundexObj.words;
   var len = words.length;
   var i = 0;
@@ -69,3 +68,33 @@ function displaySuggestions(soundexObj) {
 
   $('.word-meaning').html(html);
 }
+
+/**
+ * display the suggestions for the currently typing word
+ */
+ function suggest(typingWord) {
+   getData(app.api.suggest,typingWord).done(displaySuggestions);
+ }
+
+/**
+ * make html string for suggestion list
+ */
+ function displaySuggestions(data) {
+   if (data && data.status) {
+     // if getting suggestions successfully
+     // display suggested words
+     var words = data.words;
+     var len = words.length;
+     var i = 0;
+     var html = '';
+
+     for(i = 0; i < len; i++) {
+       html += getSuggestionItem(words[i].word);
+     }
+     $('.suggest-box').html(html);
+   }
+ }
+
+ function getSuggestionItem(word) {
+   return '<div class="suggest-item"><a href="#" class="cross-ref-link">'+word+'</a></div>';
+ }
