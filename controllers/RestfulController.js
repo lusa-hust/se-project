@@ -17,7 +17,6 @@ var RestfulController = express.Router();
 var searchWord = function (req, res) {
 
 
-
     Word.findOne({'word': {'$regex': '^' + req.params.word + '$', $options: 'i'}}).exec().then(function (word) {
         if (word) {
             // found
@@ -25,26 +24,33 @@ var searchWord = function (req, res) {
             if (req.headers.token !== undefined) {
                 User.findOne({'token': req.headers.token}, function (err, user) {
 
-                    if(user != null) {
+                    if (user != null) {
 
                         TrackingList.findOne({'user_id': user._id}).exec().then(function (tList) {
-                            if(tList) {
-                                var list = tlist.list;
+                            if (tList) {
+
+                                var list = tList.list;
+
+
                                 if (list[word.word] !== undefined) {
                                     list[word.word] = list[word.word] + 1;
                                 } else {
                                     list[word.word] = 1;
                                 }
 
+
                                 tList.list = list;
                                 tList.markModified('list');
                                 tList.save();
 
+
                             } else {
+
+
                                 var trackList = new TrackingList();
                                 trackList.user_id = user._id;
                                 trackList.save(function (err, tList) {
-                                    if(!err) {
+                                    if (!err) {
                                         var list = {};
                                         list[word.word] = 1;
                                         tList.list = list;
@@ -94,7 +100,7 @@ var searchWord = function (req, res) {
 var suggest = function (req, res) {
     var limit = Number(req.query.limit) || 10;
 
-    Word.find({'word': {'$regex': '^' + req.params.word , $options: 'i'}}).limit(limit).exec().then(function (words) {
+    Word.find({'word': {'$regex': '^' + req.params.word, $options: 'i'}}).limit(limit).exec().then(function (words) {
         if (words) {
             // found
             res.json({
