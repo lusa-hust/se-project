@@ -13,7 +13,7 @@ var TrackingListRestController = express.Router();
 
 var getTrackingListByUserId = function (req, res) {
     // get tracking list by user id
-    TrackingList.findOne({'user_id': user._id}, function (err, tList) {
+    TrackingList.findOne({'user_id': req.params.id}, function (err, tList) {
         if (err) {
             res.status(500).json({
                 status: false,
@@ -31,7 +31,7 @@ var getTrackingListByUserId = function (req, res) {
 
 var editTrackingListByUserId = function (req, res) {
     // edit tracking list by user id
-    TrackingList.findOne({'user_id': user._id}, function (err, tList) {
+    TrackingList.findOne({'user_id': req.params.id}, function (err, tList) {
 
         if (err) {
             res.status(500).json({
@@ -71,7 +71,7 @@ var editTrackingListByUserId = function (req, res) {
 };
 
 var cleanTrackingListByUserId = function (req, res) {
-    TrackingList.findOne({'user_id': user._id}, function (err, tList) {
+    TrackingList.findOne({'user_id': req.params.id}, function (err, tList) {
 
         if (err) {
             res.status(500).json({
