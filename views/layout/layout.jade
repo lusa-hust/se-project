@@ -1,0 +1,20 @@
+doctype
+html
+  head
+    title Ict dict
+    link(rel='stylesheet', href='/static/bower-plugins/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/static/css/style.css')
+    block css_files
+    script(src='/static/bower-plugins/jquery/dist/jquery.min.js')
+    script(src='/static/bower-plugins/bootstrap/dist/js/bootstrap.min.js')
+    block script_files
+  body
+    nav.navbar.navbar-inverse
+      .nav-content.row
+        .col-xs-6
+          a(href="/").logo-text.
+            IdIct
+        .col-xs-6
+          block right_menu
+    .app-container
+      block app_main

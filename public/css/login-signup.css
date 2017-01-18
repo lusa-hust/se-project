@@ -1,0 +1,38 @@
+.login-container {
+    width: 50%;
+    border: 1px solid #cccccc;
+    border-radius: 10px;
+    margin: 0px auto;
+}
+
+.login-title {
+    font-size: large;
+    padding: 15px 20px;
+    border-bottom: 1px solid #cccccc;
+}
+
+.login-container > .form-container {
+    padding: 15px;
+}
+
+.login-container > .form-container > .row {
+    margin: 10px 0px;
+}
+
+.center-button-container {
+    text-align: center;
+}
+
+
+.err-message {
+    color: red;
+    font-weight: bold;
+}
+
+.login-button {
+    background-color: green;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: white;
+    font-weight: bold;
+}

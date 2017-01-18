@@ -3,6 +3,37 @@
   margin: 30px auto;
 }
 
+/******************* nav content *********************/
+.nav-content {
+  width: 70%;
+  min-width: 700px;
+  margin: 0 auto;
+  line-height: 50px;
+  color: white;
+}
+
+.logo-text {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+}
+
+.logo-text:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.right-menu {
+  float: right;
+  padding: 0 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.right-menu:hover {
+  background-color: #CCCCCC;
+}
+
 /******************* search bar **********************/
 .search-bar {
   max-width: 800px;
