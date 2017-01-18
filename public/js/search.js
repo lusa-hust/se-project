@@ -30,6 +30,8 @@ $(document).ready(function () {
     if (e.which == 13) {
       // when user press enter button,
       // search word
+      // hide the suggest box
+      $('.suggest-box').css({"display": "none"});
       getInputAndLookup();
     } else {
       // get suggestions
@@ -38,6 +40,8 @@ $(document).ready(function () {
         // if the value of input box is not empty
         // get the suggestions
         suggest(typingWord);
+      } else {
+        $('.suggest-box').css({"display": "none"});
       }
     }
   });
@@ -47,6 +51,11 @@ $(document).ready(function () {
     var word = $(this).html();
     $('input[name="word"]').val(word);
     lookup(word);
+  });
+
+  // when search box get focus out
+  $(document).on("click", function (e) {
+    $('.suggest-box').hide();
   });
 
   // when user clicks on the speaker

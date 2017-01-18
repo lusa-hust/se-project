@@ -141,4 +141,5 @@
   width: 350px;
   background-color: #eff1f6;
   z-index: 1;
+  display: none;
 }

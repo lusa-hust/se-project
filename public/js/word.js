@@ -11,7 +11,6 @@ function lookup(word) {
   }
 
   getData(app.api.lookup, word).done(function(data) {
-    console.log(data);
     if (data.status) {
       // if fetch successfully
       if (data.found) {
@@ -91,6 +90,7 @@ function displayRelatedWords(soundexObj) {
      for(i = 0; i < len; i++) {
        html += getSuggestionItem(words[i].word);
      }
+     $('.suggest-box').css({"display": "block"});
      $('.suggest-box').html(html);
    }
  }
