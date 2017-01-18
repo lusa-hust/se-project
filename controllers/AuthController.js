@@ -9,6 +9,8 @@ var express = require('express'),
 var DataValidator = require('./Helper/DataValidator');
 var DV = new DataValidator();
 
+var WordList = require('../models/WordList');
+var TrackingList = require('../models/TrackingList');
 
 var AuthController = express.Router();
 
@@ -123,7 +125,7 @@ var signUpFunction = function (req, res) {
 
     newUser.password = req.body.password;
 
-    newUser.save(function (err) {
+    newUser.save(function (err, user) {
         if (err) {
             res.status(500).json({
                 status: false,
@@ -137,7 +139,20 @@ var signUpFunction = function (req, res) {
             message: 'User created!'
         });
 
+
+        var trackList = new TrackingList();
+        trackList.user_id = user._id;
+        trackList.save();
+
+
+        var wordList = new WordList();
+        wordList.user_id = user._id;
+        wordList.save();
+
+
     });
+
+
 };
 
 AuthController.post('/login', loginFunction);

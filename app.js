@@ -23,10 +23,20 @@ app.use(bodyParser.json());
 var port = process.env.PORT || 3000;        // set our port
 
 // add Controller
-app.use('/api/auth', require('./controllers/AuthController'));
+
+
 app.use('/api', require('./controllers/RestfulController'));
+
 app.use('/api', require('./controllers/UsersRestController'));
+app.use('/api/auth', require('./controllers/AuthController'));
+
+app.use('/api', require('./controllers/TrackingListRestController'));
+
+app.use('/api', require('./controllers/WordListRestController'));
+
 app.use('/', require('./controllers/ViewController'));
+
+
 
 // start
 app.listen(port);
