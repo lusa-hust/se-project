@@ -1,6 +1,7 @@
 var app = {
   api: {
     lookup: '/api/search/word/',
+    suggest: '/api/suggest/',
   },
   word: '',
   msg: null,
@@ -10,6 +11,7 @@ var app = {
     length: 0,
   },
   delimiter: ['*', '-', '=', '+'],
+  suggestQueue: [],
 };
 
 $(document).ready(function () {
@@ -24,9 +26,23 @@ $(document).ready(function () {
   $(document).on("click", ".lookup-button", getInputAndLookup);
 
   // when user types on search box
-  $(document).on("keypress", 'input[name="word"]', function (e) {
+  $(document).on("keyup", 'input[name="word"]', function (e) {
     if (e.which == 13) {
+      // when user press enter button,
+      // search word
+      // hide the suggest box
+      $('.suggest-box').css({"display": "none"});
       getInputAndLookup();
+    } else {
+      // get suggestions
+      var typingWord = $('input[name="word"]').val();
+      if (typingWord) {
+        // if the value of input box is not empty
+        // get the suggestions
+        suggest(typingWord);
+      } else {
+        $('.suggest-box').css({"display": "none"});
+      }
     }
   });
 
@@ -35,6 +51,11 @@ $(document).ready(function () {
     var word = $(this).html();
     $('input[name="word"]').val(word);
     lookup(word);
+  });
+
+  // when search box get focus out
+  $(document).on("click", function (e) {
+    $('.suggest-box').hide();
   });
 
   // when user clicks on the speaker

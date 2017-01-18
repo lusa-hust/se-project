@@ -17,6 +17,11 @@
   min-width: 65px;
 }
 
+.logo > img {
+  height: 65px;
+  width: auto;
+}
+
 .search-box > input {
   padding: 0 5px;
   width: 100%;
@@ -122,4 +127,19 @@
   margin: 3px 0px;
   padding-left: 15px;
   font-weight: bold;
+}
+
+.search-box-container {
+  position: relative;
+}
+
+.suggest-box {
+  position: absolute;
+  padding: 10px;
+  border: 1px solid #CCCCCC;
+  margin-top: 2px;
+  width: 350px;
+  background-color: #eff1f6;
+  z-index: 1;
+  display: none;
 }

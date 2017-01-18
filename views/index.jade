@@ -6,19 +6,22 @@ html
     link(rel='stylesheet', href='/static/css/style.css')
     script(src='/static/bower-plugins/jquery/dist/jquery.min.js')
     script(src='/static/bower-plugins/bootstrap/dist/js/bootstrap.min.js')
+    script(src='https://www.google.com/jsapi')
     script(src='/static/js/search.js')
     script(src='/static/js/service.js')
     script(src='/static/js/word.js')
+    script(src='/static/js/meaning.js')
   body
     .app-container
       .search-bar
         .row
           .col-xs-2.logo-container
-            .logo.
-              IdiCT
-          .col-xs-6
+            .logo
+              img(src="/static/images/logo.png")
+          .col-xs-6.search-box-container
             .search-box
               input(type='text', name='word', value='', placeholder='search here')
+            .suggest-box
           .col-xs-2
             .dictionary-button
               select
