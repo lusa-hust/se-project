@@ -4,6 +4,7 @@ var app = {
     suggest: '/api/suggest/',
     signup: '/api/auth/signup',
     login: '/api/auth/login',
+    tracking: '/api/tracking',
   },
   word: '',
   msg: null,
@@ -22,10 +23,22 @@ app.host = location.protocol + "//" + window.location.hostname + (location.port 
  * service used to get data
  */
 function getData(url, urlData) {
-  return $.ajax({
-    type: 'GET',
-    url: app.host + url + urlData,
-  });
+  var token = localStorage.getItem("token");
+  var urlPath = urlData ? app.host + url + urlData : app.host + url;
+  if (token) {
+    return $.ajax({
+      type: 'GET',
+      url: urlPath,
+      headers: {
+        "token": token,
+      }
+    });
+  } else {
+    return $.ajax({
+      type: 'GET',
+      url: urlPath,
+    });
+  }
 }
 
 /**

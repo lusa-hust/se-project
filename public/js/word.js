@@ -1,6 +1,7 @@
 function getInputAndLookup() {
   var word = $('input[name="word"]').val();
   lookup(word);
+  getHistory();
 }
 
 function lookup(word) {
@@ -34,6 +35,14 @@ function lookup(word) {
       // display error
     }
   });
+}
+
+function getHistory() {
+  getData(app.api.tracking).done(showTrackingList);
+}
+
+function showTrackingList(data) {
+  console.log(data);
 }
 
 function displayWord(word) {
