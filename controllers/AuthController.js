@@ -68,6 +68,16 @@ var loginFunction = function (req, res) {
                 bcrypt.genSalt(SALT_WORK_FACTOR, function (err, salt) {
                     if (err) return next(err);
 
+                    if (person.token !== undefined) {
+                        res.json({
+                            status: true,
+                            account: person.toJSON(),
+                            token: person.token
+                        });
+                        res.end();
+                        return;
+                    };
+
                     // hash the password along with our new salt
                     bcrypt.hash(person.email + person.password, salt, function (err, hash) {
                         if (err) return next(err);
@@ -80,7 +90,8 @@ var loginFunction = function (req, res) {
                             status: true,
                             account: person.toJSON(),
                             token: person.token
-                        })
+                        });
+                        res.end();
                     });
                 });
 
@@ -155,7 +166,69 @@ var signUpFunction = function (req, res) {
 
 };
 
+var checkLogin = function (req, res) {
+
+
+    User.findOne({'token': req.headers.token}, function (err, user) {
+        if (err) {
+            res.status(201).json({
+                status: false,
+                message: 'Database error !'
+            });
+            res.end();
+            return
+        }
+        if (user) {
+            res.status(201).json({
+                status: true,
+                login: true,
+                message: 'User Still Login !'
+            });
+        } else {
+            res.status(201).json({
+                status: true,
+                login: false,
+                message: 'User Logout or token invalid!'
+            });
+        }
+    });
+
+};
+
+var logout = function (req, res) {
+
+
+    User.findOne({'token': req.headers.token}, function (err, user) {
+        if (err) {
+            res.status(201).json({
+                status: false,
+                message: 'Database error !'
+            });
+            res.end();
+            return
+        }
+        if (user) {
+
+            user.token = undefined;
+            user.save();
+
+            res.status(201).json({
+                status: true,
+                message: 'User Logout !'
+            });
+        } else {
+            res.status(201).json({
+                status: true,
+                message: 'User have been Logout or token invalid !'
+            });
+        }
+    });
+
+};
+
+AuthController.get('/status', checkLogin);
 AuthController.post('/login', loginFunction);
+AuthController.get('/logout', logout);
 AuthController.post('/signup', signUpFunction);
 
 module.exports = AuthController;
