@@ -23,10 +23,10 @@ var searchWord = function (req, res) {
 
             if (req.authUser !== undefined) {
                 TrackingList.findOne({'user_id': req.authUser._id}).exec().then(function (tList) {
+
                     if (tList) {
 
-                        var list = tList.list;
-
+                        var list = tList.list || {};
 
                         if (list[word.word] !== undefined) {
                             list[word.word] = list[word.word] + 1;
