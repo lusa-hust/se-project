@@ -24,7 +24,7 @@ app.host = location.protocol + "//" + window.location.hostname + (location.port 
 function getData(url, urlData) {
   return $.ajax({
     type: 'GET',
-    url: app.host + url,
+    url: app.host + url + urlData,
   });
 }
 

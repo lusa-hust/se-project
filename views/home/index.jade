@@ -6,12 +6,9 @@ block script_files
   script(src='/static/js/service.js')
   script(src='/static/js/word.js')
   script(src='/static/js/meaning.js')
+  script(src='/static/js/user.js')
 
 block right_menu
-  a(href="#").right-menu.
-    Log in
-  a(href="#").right-menu.
-    Sign up
 
 block app_main
   .search-bar
@@ -19,15 +16,11 @@ block app_main
       .col-xs-2.logo-container
         .logo
           img(src="/static/images/logo.png")
-      .col-xs-6.search-box-container
+      .col-xs-7.search-box-container
         .search-box
           input(type='text', name='word', value='', placeholder='search here')
         .suggest-box
-      .col-xs-2
-        .dictionary-button
-          select
-            option(value=0) A-V
-      .col-xs-2
+      .col-xs-3
         .lookup-button
           span.glyphicon.glyphicon-search
   .row.presentation-container

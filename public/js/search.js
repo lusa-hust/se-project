@@ -20,6 +20,7 @@ $(document).ready(function () {
     } else {
       // get suggestions
       var typingWord = $('input[name="word"]').val();
+      console.log(typingWord);
       if (typingWord) {
         // if the value of input box is not empty
         // get the suggestions

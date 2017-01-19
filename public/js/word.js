@@ -72,7 +72,7 @@ function displayRelatedWords(soundexObj) {
  * display the suggestions for the currently typing word
  */
  function suggest(typingWord) {
-   getData(app.api.suggest,typingWord).done(displaySuggestions);
+   getData(app.api.suggest, typingWord).done(displaySuggestions);
  }
 
 /**
