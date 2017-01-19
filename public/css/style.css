@@ -183,3 +183,9 @@
 .jgrowl-fail{
     background-color: red !important;
 }
+
+/********************** error row ***********************/
+.error-row {
+  padding: 0 15px;
+  color: red;
+}

@@ -11,7 +11,3 @@ function postSignup(data) {
     }
   }
 }
-
-function openHome() {
-  window.location.href = app.host + "/";
-}

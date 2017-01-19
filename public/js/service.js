@@ -3,6 +3,7 @@ var app = {
     lookup: '/api/search/word/',
     suggest: '/api/suggest/',
     signup: '/api/auth/signup',
+    login: '/api/auth/login',
   },
   word: '',
   msg: null,
@@ -44,4 +45,8 @@ function getData(url, urlData) {
  */
  function checkLogin(token) {
 
+ }
+
+ function openHome() {
+   window.location.href = app.host + "/";
  }
