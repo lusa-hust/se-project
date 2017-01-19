@@ -174,3 +174,12 @@
   z-index: 1;
   display: none;
 }
+
+/******************* jgrowl style *********************/
+.jgrowl-success{
+    background-color: green !important;
+}
+
+.jgrowl-fail{
+    background-color: red !important;
+}

@@ -1,7 +1,12 @@
 extend ../layout/layout
 block css_files
   link(rel='stylesheet', href='/static/css/login-signup.css')
-  
+
+block script_files
+  script(src='/static/js/service.js')
+  script(src='/static/js/signup.js')
+  script(src='/static/js/signup-handler.js')
+
 block right_menu
   a(href="/login").right-menu.
     Log in
@@ -21,7 +26,7 @@ block app_main
             <label class="col-xs-4" for="email">Password:</label>
             <input class="col-xs-8" type="password" id="password" name="password">
         .row.no-margin.center-button-container.
-            <button class="login-button" type="submit">
+            <button id="signup-button" class="login-button" type="submit">
                 Sign up
             </button>
         .row.no-margin.center-button-container.
