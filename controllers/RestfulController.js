@@ -16,6 +16,13 @@ var RestfulController = express.Router();
 
 var searchWord = function (req, res) {
 
+    if (req.params.word.indexOf('\(') !== -1) {
+        req.params.word = req.params.word.replace('\(', '\\(');
+    }
+
+    if (req.params.word.indexOf('\)') !== -1) {
+        req.params.word = req.params.word.replace('\)', '\\)');
+    }
 
     Word.findOne({'word': {'$regex': '^' + req.params.word + '$', $options: 'i'}}).exec().then(function (word) {
         if (word) {
