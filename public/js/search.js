@@ -1,19 +1,3 @@
-var app = {
-  api: {
-    lookup: '/api/search/word/',
-    suggest: '/api/suggest/',
-  },
-  word: '',
-  msg: null,
-  meaning: {
-    content: '',
-    pointer: 0,
-    length: 0,
-  },
-  delimiter: ['*', '-', '=', '+'],
-  suggestQueue: [],
-};
-
 $(document).ready(function () {
 
   // init voice object

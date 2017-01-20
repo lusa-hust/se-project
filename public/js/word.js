@@ -15,6 +15,11 @@ function lookup(word) {
       // if fetch successfully
       if (data.found) {
         // if the word is found
+        if (localStorage.getItem("token")) {
+          // if we have token
+          getHistory();
+        }
+
         displayWord(data.word);
         // set the current lookup word
         app.word = word;
@@ -34,6 +39,36 @@ function lookup(word) {
       // display error
     }
   });
+}
+
+function getHistory() {
+  getData(app.api.tracking).done(showTrackingList);
+}
+
+function showTrackingList(data) {
+  var html = '';
+  if (data) {
+    if (data.status) {
+      var list = data.trackingList.list;
+      console.log(list);
+      for (var item in list) {
+        if (list.hasOwnProperty(item)) {
+          html += '<div class="history-item clearfix">';
+          html += '<div class="history-word">' + item;
+          html += '</div><div class="history-count">' + list[item] +'</div></div>';
+        }
+      }
+      if (html) {
+        $('.history-container').css({"display": "block"});
+        $('.history-body').html(html);
+        if (list.hasOwnProperty(app.word) && list[app.word] > 1) {
+          $('.tracking-times').html('You looked up this word ' + list[app.word] + ' times');
+        }
+      } else {
+        $('.history-container').css({"display": "none"});
+      }
+    }
+  }
 }
 
 function displayWord(word) {
@@ -72,7 +107,7 @@ function displayRelatedWords(soundexObj) {
  * display the suggestions for the currently typing word
  */
  function suggest(typingWord) {
-   getData(app.api.suggest,typingWord).done(displaySuggestions);
+   getData(app.api.suggest, typingWord).done(displaySuggestions);
  }
 
 /**

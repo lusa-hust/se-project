@@ -3,6 +3,37 @@
   margin: 30px auto;
 }
 
+/******************* nav content *********************/
+.nav-content {
+  width: 70%;
+  min-width: 700px;
+  margin: 0 auto;
+  line-height: 50px;
+  color: white;
+}
+
+.logo-text {
+  font-size: 30px;
+  font-weight: bold;
+  color: white;
+}
+
+.logo-text:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.right-menu {
+  float: right;
+  padding: 0 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.right-menu:hover {
+  background-color: #CCCCCC;
+}
+
 /******************* search bar **********************/
 .search-bar {
   max-width: 800px;
@@ -142,4 +173,72 @@
   background-color: #eff1f6;
   z-index: 1;
   display: none;
+}
+
+/******************* jgrowl style *********************/
+.jgrowl-success{
+    background-color: green !important;
+}
+
+.jgrowl-fail{
+    background-color: red !important;
+}
+
+/********************** error row ***********************/
+.error-row {
+  padding: 0 15px;
+  color: red;
+}
+
+/*********************** history container ************/
+.history-container {
+  display: none;
+}
+.history-content {
+  margin-top: 20px;
+  border: 1px solid #CCCCCC;
+}
+
+.history-header {
+  padding: 5px;
+  background-color: #234b9a;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.history-body {
+  padding: 5px 0;
+  max-height: 400px;
+  overflow-y: scroll;
+}
+
+.history-item {
+  padding: 0 5px;
+}
+
+.history-item:nth-child(even) {
+  background-color: #CCC;
+}
+
+.history-word {
+  float: left;
+}
+
+.history-count {
+  float: right;
+  width: 20px;
+}
+
+.history-title {
+  padding: 5px;
+  border-bottom: 1px solid #CCCCCC;
+}
+
+.history-title > .pull-right {
+  padding-left: 5px;
+}
+
+.tracking-times {
+  color: red;
 }

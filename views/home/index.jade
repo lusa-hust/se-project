@@ -1,0 +1,41 @@
+extend ../layout/layout
+
+block script_files
+  script(src='https://www.google.com/jsapi')
+  script(src='/static/js/search.js')
+  script(src='/static/js/service.js')
+  script(src='/static/js/word.js')
+  script(src='/static/js/meaning.js')
+  script(src='/static/js/user.js')
+
+block right_menu
+
+block app_main
+  .search-bar
+    .row
+      .col-xs-2.logo-container
+        .logo
+          img(src="/static/images/logo.png")
+      .col-xs-7.search-box-container
+        .search-box
+          input(type='text', name='word', value='', placeholder='search here')
+        .suggest-box
+      .col-xs-3
+        .lookup-button
+          span.glyphicon.glyphicon-search
+  .row.presentation-container
+    .col-xs-9.word-container
+      .lookup-word
+      .tracking-times
+      .word-pronounce
+      .word-meaning          
+    .col-xs-3.history-container
+      .history-content
+        .history-header.
+          Tracking
+        .history-title.clearfix
+          .history-word.
+            Word
+          .pull-right.
+            Times
+        .history-body

@@ -1,0 +1,33 @@
+extend ../layout/layout
+block css_files
+  link(rel='stylesheet', href='/static/css/login-signup.css')
+
+block script_files
+  script(src='/static/js/service.js')
+  script(src='/static/js/signup.js')
+  script(src='/static/js/signup-handler.js')
+
+block right_menu
+  a(href="/login").right-menu.
+    Log in
+
+block app_main
+  .login-container
+      div(class="login-title").
+        Sign up
+      div(class="form-container")
+        .row.no-margin.
+            <label class="col-xs-4" for="email">Name:</label>
+            <input class="col-xs-8" type="text" id="name" name="name" value="">
+        .row.no-margin.
+            <label class="col-xs-4" for="email">Email address:</label>
+            <input class="col-xs-8" type="email" id="email" name="email" value="">
+        .row.no-margin.
+            <label class="col-xs-4" for="email">Password:</label>
+            <input class="col-xs-8" type="password" id="password" name="password">
+        .row.no-margin.center-button-container.
+            <button id="signup-button" class="login-button" type="submit">
+                Sign up
+            </button>
+        .row.no-margin.center-button-container.
+            <a href="/Login">or Log in</a>
